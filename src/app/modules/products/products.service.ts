@@ -13,8 +13,8 @@ const getAllProductsFromDB = async () => {
   return result;
 };
 
-const getSingleProductFromDB = async (id: string) => {
-  const result = await ProductModel.findById(id);
+const getSingleProductFromDB = async (_id: string) => {
+  const result = await ProductModel.find({_id});
   return result;
 };
 

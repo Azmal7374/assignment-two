@@ -54,13 +54,23 @@ const getAllProducts = async (req: Request, res: Response) => {
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
+    console.log(productId)
     const result = await ProductService.getSingleProductFromDB(productId);
+    // console.log(result.length);
 
+   if(result.length>0){
     res.status(200).json({
-      success: true,
-      message: 'Product retrieved successfully',
-      data: result,
-    });
+        success: true,
+        message: 'Single Product retrieved successfully',
+        data: result,
+      });
+   }else{
+     res.status(404).json({
+        success: false,
+        message: 'Product not found! Because Product Item Less Than 0'
+     });
+   }
+
   } catch (err: any) {
     res.status(500).json({
       success: false,

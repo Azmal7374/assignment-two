@@ -1,5 +1,5 @@
-import { Product } from "../produtcs.model";
-import { IProduct } from "./produtcs.interface";
+
+
 
 const createProductIntoDB = async (productData: IProduct) => {
   if (await Product.isProductExists(productData.name)) {

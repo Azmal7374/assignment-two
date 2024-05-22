@@ -1,13 +1,23 @@
 import { Request, Response } from 'express';
 import { ProductService } from './products.service';
-import { productValidationSchema } from './products.validation';
+import productValidationSchema from './product.joi.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData  =  req.body;
       console.log(productData)
-    // const zodParseData =productValidationSchema.parse(productData);
-    const result = await ProductService.createProductIntoDB(productData);
+
+      const {error, value} = productValidationSchema.validate(productData)
+  
+    const result = await ProductService.createProductIntoDB(value);
+
+    if(error) {
+        res.status(500).json({
+            success: false,
+            message:"You Are Wrong Data Validation",
+            error: error.details
+        })
+    }
 
     res.status(201).json({
       success: true,

@@ -1,27 +1,25 @@
+import { Iproduct } from "./produtcs.interface";
+import { ProductModel } from "./produtcs.model";
 
 
 
-const createProductIntoDB = async (productData: IProduct) => {
-  if (await Product.isProductExists(productData.name)) {
-    throw new Error('Product already exists');
-  }
-
-  const result = await Product.create(productData);
+const createProductIntoDB = async (productData: Iproduct) => {
+  const result = await ProductModel.create(productData);
   return result;
 };
 
 const getAllProductsFromDB = async () => {
-  const result = await Product.find();
+  const result = await ProductModel.find();
   return result;
 };
 
 const getSingleProductFromDB = async (id: string) => {
-  const result = await Product.findById(id);
+  const result = await ProductModel.findById(id);
   return result;
 };
 
 const deleteProductFromDB = async (id: string) => {
-  const result = await Product.findByIdAndDelete(id);
+  const result = await ProductModel.findByIdAndDelete(id);
   return result;
 };
 

@@ -1,14 +1,3 @@
-
-export interface IproductVariants {
-    type: string;
-    variant: string;
-}
-
-export interface IproductInventory {
-    quantity: number;
-    inStock?: boolean;
-}
-
 export interface Iproduct {
     name: string;
     description: string;
@@ -18,3 +7,15 @@ export interface Iproduct {
     variants: IproductVariants[];
     inventory: IproductInventory;
 }
+
+
+export interface IproductVariants {
+    type: string;
+    variant: string;
+}
+
+export interface IproductInventory {
+    quantity: number;
+    inStock: boolean;
+}
+

@@ -5,7 +5,7 @@ import productValidationSchema from './product.joi.validation';
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData  =  req.body;
-      console.log(productData)
+    //   console.log(productData)
 
       const {error, value} = productValidationSchema.validate(productData)
   

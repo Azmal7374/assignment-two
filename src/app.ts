@@ -1,16 +1,21 @@
-import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-const app: Application = express();
-// const port = 3000
+import express, { Application, Request, Response } from 'express';
+import { ProductRoutes } from './app/modules/products/products.route';
 
+const app: Application = express();
+
+// Parsers
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req: Request, res: Response) => {
-  // const a = 10
-  // res.send(a)
+// Application routes
+app.use('/api/v1/products', ProductRoutes);
 
-  res.send('Hello World!');
-});
+const getAController = (req: Request, res: Response) => {
+  const a = 10;
+  res.send(`${a}`);
+};
+
+app.get('/', getAController);
 
 export default app;

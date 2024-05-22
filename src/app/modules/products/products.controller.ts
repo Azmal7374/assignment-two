@@ -24,10 +24,10 @@ const createProduct = async (req: Request, res: Response) => {
       message: 'Product created successfully',
       data: result,
     });
-  } catch (err: any) {
+  } catch (err ) {
     res.status(400).json({
       success: false,
-      message: err.message || 'Something went wrong',
+      message:'Something went wrong',
       error: err,
     });
   }
@@ -35,17 +35,18 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductService.getAllProductsFromDB();
+    const searchTerm = req.query.searchTerm as string;
+    const result = await ProductService.getAllProductsFromDB( searchTerm);
 
     res.status(200).json({
       success: true,
-      message: 'Products retrieved successfully',
+      message: 'Products Fetched successfully',
       data: result,
     });
-  } catch (err: any) {
+  } catch (err ) {
     res.status(500).json({
       success: false,
-      message: err.message || 'Something went wrong',
+      message: 'Something went wrong',
       error: err,
     });
   }
@@ -70,10 +71,10 @@ const getSingleProduct = async (req: Request, res: Response) => {
         message: 'Product not found! Because Product Item Less Than 0',
       });
     }
-  } catch (err: any) {
+  } catch (err ) {
     res.status(500).json({
       success: false,
-      message: err.message || 'Something went wrong',
+      message:'Something went wrong',
       error: err,
     });
   }
@@ -115,32 +116,35 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductService.deleteProductFromDB(productId);
 
-    if (result) {
-        res.status(200).json({
-          success: true,
-          message: "Product deleted  successfully!",
-          data: null,
-        });
-      } else {
-        res.status(404).json({
-          success: false,
-          message: "Product not deleted!",
-        });
-      }
+     if (result) {
+      res.status(200).json({
+        success: true,
+        message: "Product deleted  successfully!",
+        data: null,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Product not deleted!",
+      });
+    }
 
     res.status(200).json({
       success: true,
       message: 'Product deleted successfully',
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
-      message: err.message || 'Something went wrong',
+      message: 'Something went wrong',
       error: err,
     });
   }
 };
+
+
+
 
 export const ProductController = {
   createProduct,
